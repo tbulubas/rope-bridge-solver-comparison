@@ -7,6 +7,10 @@ optimum; `graph-sequential` plans one lane after the other. The Timefold
 runs stop when they reach it or after 30 s; their time is the solver's own,
 without the start of the JVM. Every plan is checked with `verify()`.
 
+Measured on a machine with 24 logical cores. CP-SAT uses all of them; SCIP, the graph
+algorithms and Timefold run on one thread. With few cores CP-SAT can be much slower, see
+the note in the last section.
+
 ## Time in seconds
 
 | L (mm) | planks | candidates | graph | graph-sequential | scip-flow | cpsat-flow | scip-cover | cpsat-cover | timefold-joints | timefold-pallets |
@@ -35,6 +39,12 @@ decreasing). Model C decides pallets and cutting together; the same model is sol
 with SCIP and with CP-SAT. The lower bound is ⌈2·L/M⌉. Averages over the seeds;
 `proved` counts the runs in which the solver proved its plan optimal within the time
 limit.
+
+CP-SAT owes its speed here to its parallel search. On the 12 m bridge with seed 1 it
+proves the optimum in 0.3 s with 8 or more workers, and with 4 or fewer it does not
+finish the proof within 60 s, while single-threaded SCIP needs about 30 s; the three
+other 12 m bridges tried took CP-SAT 0.3 to 3.5 s with 2 workers. Both solvers still
+return a plan with the minimal number of stock pieces.
 
 | L (mm) | candidates | lower bound | graph-stock pieces | scip-stock pieces | cpsat-stock pieces | graph-stock pallets | model C pallets | scip proved | scip time (s) | cpsat proved | cpsat time (s) |
 |---|---|---|---|---|---|---|---|---|---|---|---|

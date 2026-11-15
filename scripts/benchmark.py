@@ -3,7 +3,7 @@
 
 """Benchmark: both graph algorithms, both MIP models and both Timefold models.
 
-Usage: python scripts/benchmark.py [--part all|solvers|stock] [--lengths 16000,32000] [--seeds 3] [--seconds 30]
+Usage: python scripts/benchmark.py [--part all|solvers|stock|report] [--lengths 16000,32000] [--seeds 3] [--seconds 30]
 
 Every instance is solved by the two-lane graph algorithm first; its pallet count is the
 optimum and the target of the Timefold runs, which stop as soon as they reach
@@ -21,6 +21,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import os
 import statistics
 import subprocess
 import sys
@@ -36,6 +37,7 @@ ROOT = Path(__file__).resolve().parent.parent
 JAR = ROOT / "timefold" / "target" / "fixed-planks-timefold.jar"
 CSV_PATH = ROOT / "docs" / "benchmark" / "results.csv"
 STOCK_CSV_PATH = ROOT / "docs" / "benchmark" / "stock.csv"
+CORES = os.cpu_count()
 REPORT_PATH = ROOT / "docs" / "benchmark.md"
 
 PYTHON_SOLVERS = ("graph", "graph-sequential", "scip-flow", "cpsat-flow", "scip-cover", "cpsat-cover")
@@ -143,6 +145,12 @@ def stock_report(rows: list[dict]) -> list[str]:
         "`proved` counts the runs in which the solver proved its plan optimal within the time",
         "limit.",
         "",
+        "CP-SAT owes its speed here to its parallel search. On the 12 m bridge with seed 1 it",
+        "proves the optimum in 0.3 s with 8 or more workers, and with 4 or fewer it does not",
+        "finish the proof within 60 s, while single-threaded SCIP needs about 30 s; the three",
+        "other 12 m bridges tried took CP-SAT 0.3 to 3.5 s with 2 workers. Both solvers still",
+        "return a plan with the minimal number of stock pieces.",
+        "",
         "| L (mm) | candidates | lower bound | graph-stock pieces | scip-stock pieces | cpsat-stock pieces "
         "| graph-stock pallets | model C pallets | scip proved | scip time (s) | cpsat proved | cpsat time (s) |",
         "|---|---|---|---|---|---|---|---|---|---|---|---|",
@@ -192,6 +200,10 @@ def report(rows: list[dict], seconds: float, stock_rows: list[dict]) -> str:
         f"runs stop when they reach it or after {seconds:g} s; their time is the solver's own,",
         "without the start of the JVM. Every plan is checked with `verify()`.",
         "",
+        f"Measured on a machine with {CORES} logical cores. CP-SAT uses all of them; SCIP, the graph",
+        "algorithms and Timefold run on one thread. With few cores CP-SAT can be much slower, see",
+        "the note in the last section.",
+        "",
         "## Time in seconds",
         "",
         "| L (mm) | planks | candidates | " + " | ".join(SOLVERS) + " |",
@@ -229,7 +241,7 @@ def report(rows: list[dict], seconds: float, stock_rows: list[dict]) -> str:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--part", choices=("all", "solvers", "stock"), default="all")
+    parser.add_argument("--part", choices=("all", "solvers", "stock", "report"), default="all")
     parser.add_argument("--lengths", default="16000,32000,64000,128000", help="bridge lengths in mm")
     parser.add_argument("--seeds", type=int, default=3, help="instances per length")
     parser.add_argument("--seconds", type=float, default=30, help="time limit of a Timefold run")

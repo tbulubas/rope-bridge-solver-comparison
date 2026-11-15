@@ -180,7 +180,10 @@ interface to two solvers:
 - **CP-SAT**, a constraint programming solver built on SAT with clause
   learning; it accepts the models because all their variables are integer.
 
-The benchmark reports both (`scip-…` and `cpsat-…`).
+The benchmark reports both (`scip-…` and `cpsat-…`). SCIP runs on one thread;
+CP-SAT runs a portfolio of search strategies on all cores, so its times
+depend on the machine. On model C that matters: with many cores CP-SAT is
+several times faster than SCIP, with two cores it can be the slower one.
 
 ## Model size
 

@@ -14,7 +14,9 @@ LinkedIn post: structure matters more than the tool.
 Package `fixed_planks`: `instance.py`, `solution.py` (`verify()`),
 `graph.py` (`solve`: min-cost flow, optimal; `solve_sequential`: lane after
 lane, the user's original approach), `model.py` (models A and B; every MIP model runs with SCIP and with CP-SAT,
-solver names `scip-…` / `cpsat-…`, keep both in the results), `stock.py` (extension: cutting from stock pieces of
+solver names `scip-…` / `cpsat-…`, keep both in the results; CP-SAT uses all cores, so its
+times on model C depend on the machine — do not call it faster without
+saying so), `stock.py` (extension: cutting from stock pieces of
 length M, model C; `pack` cuts a finished plan; the
 extension is hypothetical, only to show that the MIP takes new requirements), `cli.py`;
 `tests/exhaustive.py` is the independent optimality check.
