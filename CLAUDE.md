@@ -22,7 +22,7 @@ extension is hypothetical, only to show that the MIP takes new requirements), `c
 (`make notebook`, `make notebook-check`) is stored with its outputs; it is
 Python only and shows Timefold through `docs/benchmark/*.csv` plus one
 optional live cell.
-`timefold/` is a Kotlin Maven module (JDK 21 or newer, bytecode target 21,
+`timefold/` is a Kotlin Maven module (JDK 25, bytecode target 25,
 Timefold Solver 2.8, models
 `pallets` and `joints`); `make timefold` builds its runner jar, which
 `scripts/benchmark.py` calls.

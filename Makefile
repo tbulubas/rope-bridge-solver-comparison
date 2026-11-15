@@ -10,7 +10,7 @@
 #   make test      run the tests
 #   make run       solve an example instance (override with ARGS="...")
 #   make notebook  open notebooks/solver_comparison.ipynb in JupyterLab
-#   make timefold  build the Timefold runner (needs JDK 21 and Maven)
+#   make timefold  build the Timefold runner (needs JDK 25 and Maven)
 #   make benchmark run all solvers on the benchmark instances
 #
 # The project uses Python 3.12 (PYTHON_VERSION). The base interpreter is found

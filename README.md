@@ -56,8 +56,8 @@ and modify in Google Colab for personal, non-commercial exploration.
 ## Development environment
 
 Requires Python 3.12 and GNU make 3.82+. SCIP and CP-SAT are shipped with OR-Tools. The
-Timefold models additionally need JDK 21 or newer (tested with Temurin 21
-and 25) and Maven 3.9+; the Timefold Solver
+Timefold models additionally need JDK 25 (tested with Temurin 25) and Maven
+3.9+; the Timefold Solver
 itself is downloaded by Maven.
 
 | Group       | Packages  | Used for        |
@@ -128,7 +128,7 @@ can be read without running it; `make notebook-check` runs all cells headless
 
 The notebook is Python and the Timefold models are Kotlin, so the notebook
 shows the stored Timefold results from `docs/benchmark/`. Its one live
-Timefold cell runs only where Java 21 or newer and the runner built by
+Timefold cell runs only where Java 25 or newer and the runner built by
 `make timefold` are present, and is skipped otherwise — as in Colab.
 
 ## Tests
