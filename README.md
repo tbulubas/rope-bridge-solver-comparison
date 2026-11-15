@@ -22,6 +22,8 @@ three more constraints (model C); the graph algorithm cannot express it and
 is left with cutting its finished plan afterwards, which costs about one
 stock piece in thirteen on a 16 m bridge.
 
+![The same bridge decked by the graph algorithm and by Timefold, and the four approaches on 128 m bridges](images/rope-bridge-solver-comparison-linkedin.png)
+
 The point of the comparison: recognising the structure of a problem matters
 more than the tool. The same solver that is stuck far from the optimum with
 one model finds it quickly with another, and the graph and MIP formulations
@@ -73,6 +75,7 @@ itself is downloaded by Maven.
 | `make venv`          | create `.venv` (Python 3.12) and install the project     |
 | `make test`          | run the tests with pytest                                |
 | `make run`           | solve an example instance; options with `ARGS="..."`     |
+| `make image`         | render `images/rope-bridge-solver-comparison-linkedin.png` |
 | `make notebook`      | open `notebooks/solver_comparison.ipynb` in JupyterLab   |
 | `make notebook-check` | run all notebook cells headless and store the outputs   |
 | `make timefold`      | build `timefold/target/fixed-planks-timefold.jar`        |
@@ -131,6 +134,18 @@ shows the stored Timefold results from `docs/benchmark/`. Its one live
 Timefold cell runs only where Java 25 or newer and the runner built by
 `make timefold` are present, and is skipped otherwise — as in Colab.
 
+## Image
+
+```bash
+make image
+```
+
+runs [scripts/linkedin_image.py](scripts/linkedin_image.py): it decks a 16 m
+bridge with the graph algorithm and, for 30 seconds, with the Timefold model
+that has one entity per candidate pallet, checks both plans with `verify`,
+adds the results of the longest benchmark bridges from `docs/benchmark/` and
+writes the image (2400 × 1350 px). It needs the Timefold runner.
+
 ## Tests
 
 ```bash
@@ -159,7 +174,8 @@ src/fixed_planks/
   cli.py              command line interface
 notebooks/            solver_comparison.ipynb
 timefold/             Kotlin module with the two Timefold models (Maven)
-scripts/              benchmark.py, check_venv.py
+scripts/              benchmark.py, linkedin_image.py, check_venv.py
+images/               the image
 tests/                pytest suite; exhaustive.py searches tiny instances completely
 .run/                 shared IntelliJ run configurations
 Makefile              environment and task shortcuts

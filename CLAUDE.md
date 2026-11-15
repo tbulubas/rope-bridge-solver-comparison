@@ -22,6 +22,8 @@ extension is hypothetical, only to show that the MIP takes new requirements), `c
 (`make notebook`, `make notebook-check`) is stored with its outputs; it is
 Python only and shows Timefold through `docs/benchmark/*.csv` plus one
 optional live cell.
+`scripts/linkedin_image.py` (`make image`) renders
+`images/rope-bridge-solver-comparison-linkedin.png`.
 `timefold/` is a Kotlin Maven module (JDK 25, bytecode target 25,
 Timefold Solver 2.8, models
 `pallets` and `joints`); `make timefold` builds its runner jar, which
