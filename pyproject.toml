@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fixed-planks"
+version = "0.1.0"
+description = "Decking a rope bridge with fixed planks: graph algorithm and MIP models (OR-Tools + SCIP), compared with Timefold"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Taras Bulubas", email = "taras.bulubas@gmail.com" }]
+license = "LicenseRef-All-Rights-Reserved"
+license-files = ["LICENSE"]
+classifiers = ["Private :: Do Not Upload"]
+dependencies = ["ortools>=9.10"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+plot = ["matplotlib>=3.8"]
+notebook = ["fixed-planks[plot]", "jupyterlab>=4", "pandas>=2"]
+
+[project.scripts]
+fixed-planks = "fixed_planks.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = ["ignore:builtin type .* has no __module__ attribute:DeprecationWarning"]

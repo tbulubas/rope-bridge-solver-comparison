@@ -1,0 +1,16 @@
+length,seed,candidates,lower_bound,graph_pieces,graph_pallets,scip_pieces,scip_pallets,scip_status,scip_seconds,cpsat_pieces,cpsat_pallets,cpsat_status,cpsat_seconds
+8000,0,43,7,8,8,7,8,optimal,0.478,7,8,optimal,0.105
+8000,1,46,7,8,8,7,8,optimal,0.077,7,8,optimal,0.203
+8000,2,47,7,8,8,7,8,optimal,0.277,7,8,optimal,0.225
+8000,3,42,7,8,8,7,8,optimal,0.539,7,8,optimal,0.210
+8000,4,47,7,8,8,7,8,optimal,0.242,7,8,optimal,0.225
+12000,0,69,10,11,11,10,11,optimal,1.099,10,11,optimal,0.329
+12000,1,69,10,12,12,10,13,optimal,33.607,10,13,optimal,0.435
+12000,2,72,10,11,12,10,12,optimal,1.565,10,12,optimal,0.301
+12000,3,65,10,12,12,10,13,optimal,1.681,10,13,optimal,0.434
+12000,4,74,10,12,12,10,13,optimal,10.476,10,13,optimal,0.375
+16000,0,96,13,14,15,13,16,optimal,2.521,13,16,optimal,0.742
+16000,1,102,13,14,15,13,17,optimal,4.838,13,17,optimal,8.316
+16000,2,96,13,14,15,13,16,optimal,4.266,13,16,optimal,0.654
+16000,3,95,13,14,15,13,17,optimal,27.969,13,17,optimal,0.679
+16000,4,100,13,14,15,13,18,feasible,59.171,13,17,optimal,2.636
